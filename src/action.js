@@ -18,7 +18,7 @@ function displayMessage(message, sender) {
     document.getElementById('messages-history').appendChild(messageDiv);
 }
 
-function getAssistantResponse(userMessage) {
+function getAssistantResponse() {
     // Simulate getting a response from the assistant
     return 'This is a response from the assistant.';
 }
