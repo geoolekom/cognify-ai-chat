@@ -1,0 +1,26 @@
+{
+  "name": "cognify-ai-chat",
+  "version": "1.0.0",
+  "description": "Cognify AI chat",
+  "homepage": "https://github.com/geoolekom/cognify-ai-chat#readme",
+  "bugs": {
+    "url": "https://github.com/geoolekom/cognify-ai-chat/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geoolekom/cognify-ai-chat.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.0.1",
+    "globals": "^17.3.0"
+  }
+}
