@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function MessageForm({ appendMessage }) {
     const [input, setInput] = useState('');
+    const [counter, setCounter] = useState(0);
 
     function onSubmit(event) {
         event.preventDefault();
         appendMessage(input);
         setInput('');
+        setCounter(counter + 1);
     }
+
+    useEffect(() => {
+        console.log(`Form submitted ${counter} times`);
+    }, [counter]);
 
     return (
         <form className="p-4 flex" onSubmit={onSubmit}>
@@ -21,7 +27,7 @@ function MessageForm({ appendMessage }) {
                 />
             </div>
             <div>
-                <button type="submit" className="p-2 bg-gray-300">
+                <button type="submit" className="mx-2 p-2 bg-gray-300">
                     Send
                 </button>
             </div>
