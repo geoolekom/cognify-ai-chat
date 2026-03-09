@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Conversation from './Conversation';
 
 function Sidebar({ activeConversationID, setActiveConversationID }) {
     const initialConversations = [
@@ -9,15 +10,16 @@ function Sidebar({ activeConversationID, setActiveConversationID }) {
     const conversationElements = [];
     for (const conversation of conversations) {
         conversationElements.push(
-            <div
+            <Conversation
                 key={conversation.id}
-                className={`block rounded-lg p-2 my-1 ${activeConversationID === conversation.id ? 'bg-gray-700' : ''}`}
-                onClick={() => setActiveConversationID(conversation.id)}
-            >
-                {conversation.title}
-            </div>,
+                title={conversation.title}
+                isActive={activeConversationID === conversation.id}
+                setActive={() => setActiveConversationID(conversation.id)}
+            />,
         );
     }
+
+    console.log(conversationElements);
 
     function createNewConversation() {
         const newConversation = { id: conversations.length + 1, title: 'New Conversation' };
