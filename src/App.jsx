@@ -13,7 +13,7 @@ function App() {
     }, [activeConversationID, messages]);
 
     function appendMessage(input) {
-        createMessage(activeConversationID, 'user', input).then(() => {
+        createMessage(activeConversationID, input).then(() => {
             setMessages([...messages]);
         });
     }
