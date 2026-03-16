@@ -18,6 +18,14 @@ form.addEventListener('submit', (event) => {
     getAssistantResponse(messages);
 });
 
+function doSomething() {
+    console.log('Doing something...');
+    for (i = 0; i < 1000000000; i++) {
+        // Simulate a long-running task
+    }
+    console.log('Done!');
+}
+
 function displayMessage(message, role) {
     const messageDiv = document.createElement('chat-message');
     messageDiv.setAttribute('role', role);
