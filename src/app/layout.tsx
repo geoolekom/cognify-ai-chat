@@ -24,7 +24,12 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <nav className="relative bg-gray-800/50 my-2">
+                    <h3 className="p-2">Cognify AI chat</h3>
+                </nav>
+                <div id="root">{children}</div>
+            </body>
         </html>
     );
 }

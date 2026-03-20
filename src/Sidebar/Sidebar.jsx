@@ -10,7 +10,7 @@ function Sidebar({ activeConversationID }) {
 
     useEffect(() => {
         getConversations().then(setConversations);
-    }, [conversations]);
+    }, []);
 
     function createNewConversation() {
         createConversation('New Conversation').then((newConversation) => {

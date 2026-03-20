@@ -9,11 +9,11 @@ function ChatPanel({ activeConversationID }) {
 
     useEffect(() => {
         getMessages(activeConversationID).then(setMessages);
-    }, [messages, activeConversationID]);
+    }, [activeConversationID]);
 
     function appendMessage(input) {
-        createMessage(activeConversationID, input).then(() => {
-            setMessages([...messages]);
+        createMessage(activeConversationID, input).then((newMessage) => {
+            setMessages([...messages, newMessage]);
         });
     }
 
