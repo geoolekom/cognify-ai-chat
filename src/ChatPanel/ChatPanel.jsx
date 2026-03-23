@@ -12,8 +12,10 @@ function ChatPanel({ activeConversationID }) {
     }, [activeConversationID]);
 
     function appendMessage(input) {
-        createMessage(activeConversationID, input).then((newMessage) => {
-            setMessages([...messages, newMessage]);
+        const newMessages = [...messages, { role: 'user', text: input }];
+        setMessages(newMessages);
+        createMessage(activeConversationID, input).then((aiMessage) => {
+            setMessages([...newMessages, aiMessage]);
         });
     }
 

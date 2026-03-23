@@ -37,7 +37,7 @@ async function createMessage(consversationID: number, text: string) {
     const aiResponse = await llmRequest(openAImessages);
     const aiMessage = { id: id + 1, role: 'assistant', text: aiResponse };
     conersationHistory.push(aiMessage);
-    return newMessage;
+    return aiMessage;
 }
 
 export async function GET(request: Request) {
