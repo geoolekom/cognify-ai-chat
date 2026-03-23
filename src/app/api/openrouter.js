@@ -1,4 +1,4 @@
-const API_KEY = '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';
+const API_KEY = process.env.OPENROUTER_API_KEY;
 const MODEL = 'google/gemini-3.1-flash-lite-preview';
 export const BASE_URL = 'https://openrouter.ai/api/v1';
 
@@ -21,5 +21,9 @@ async function completionsRequest(model, messages, stream = false) {
 export async function llmRequest(messages) {
     const response = await completionsRequest(MODEL, messages);
     const data = await response.json();
-    return data.choices[0].message.content;
+    console.info(`Response from OpenRouter: ${response}`);
+    if (data.choices.length > 0) {
+        return data.choices[0].message.content;
+    }
+    return '<...no answer from LLM...>';
 }
