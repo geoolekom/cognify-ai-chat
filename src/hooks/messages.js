@@ -1,13 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-export function getMessages(consversationId) {
+export function useMessagesQuery(consversationId) {
     return useQuery({
         queryKey: ['messages', consversationId],
         queryFn: () => fetch(`/api/messages?consversationId=${consversationId}`).then((res) => res.json()),
     });
 }
 
-export function createMessage(consversationId, text) {
+export function useMessagesMutation(consversationId, text) {
     const body = JSON.stringify({ consversationId, text });
 
     const queryClient = useQueryClient();

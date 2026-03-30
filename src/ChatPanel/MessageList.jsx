@@ -1,9 +1,9 @@
 'use client';
-import { getMessages } from '../api/messages';
+import { useMessagesQuery } from '../hooks/messages';
 import ChatMessage from './ChatMessage';
 
 function MessageList({ conversationID }) {
-    const response = getMessages(conversationID);
+    const response = useMessagesQuery(conversationID);
     const messages = response.data ?? [];
 
     const chatMessages = [];

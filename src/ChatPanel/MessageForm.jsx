@@ -1,12 +1,12 @@
 'use client';
 import { useState } from 'react';
-import { createMessage } from '../api/messages';
+import { useMessagesMutation } from '../hooks/messages';
 
 function MessageForm({ conversationID }) {
     const [input, setInput] = useState('');
     const [counter, setCounter] = useState(0);
 
-    const mutation = createMessage(conversationID, input);
+    const mutation = useMessagesMutation(conversationID, input);
 
     function onSubmit(event) {
         event.preventDefault();

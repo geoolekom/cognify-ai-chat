@@ -1,10 +1,10 @@
 'use client';
 import Link from 'next/link';
 import Conversation from './Conversation';
-import { getConversations } from '../api/conversations';
+import { useConversationsQuery } from '../hooks/conversations';
 
 function ConversationList({ activeConversationID }) {
-    const response = getConversations();
+    const response = useConversationsQuery();
     const conversations = response.data ?? [];
 
     const conversationElements = [];
