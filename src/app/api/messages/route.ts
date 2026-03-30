@@ -1,3 +1,4 @@
+import { prisma } from '../db';
 import { llmRequest } from '../openrouter';
 
 const MESSAGES_DATABASE: Map<number, any> = new Map([
@@ -23,33 +24,45 @@ const MESSAGES_DATABASE: Map<number, any> = new Map([
     ],
 ]);
 
-async function getMessages(consversationID: number) {
-    return MESSAGES_DATABASE.get(consversationID) ?? [];
+async function getMessages(conversationId: string) {
+    return await prisma.message.findMany({
+        where: { conversationId },
+        orderBy: { createdAt: 'asc' },
+    });
 }
 
-async function createMessage(consversationID: number, text: string) {
-    const conersationHistory = MESSAGES_DATABASE.get(consversationID) ?? [];
-    const id = conersationHistory.length + 1;
-    const newMessage = { id, role: 'user', text };
+async function createMessage(conversationId: string, text: string) {
+    const connect = { conversation: { connect: { id: conversationId } } };
+    const newMessage = await prisma.message.create({
+        data: { ...connect, role: 'user', text },
+    });
+    const conersationHistory = await prisma.message.findMany({
+        where: { conversationId },
+        orderBy: { createdAt: 'asc' },
+    });
     conersationHistory.push(newMessage);
 
-    const openAImessages = conersationHistory.map(({ role, text }) => ({ role, content: text }));
+    const openAImessages = conersationHistory.map(({ role, text }: { role: string; text: string }) => ({
+        role,
+        content: text,
+    }));
     const aiResponse = await llmRequest(openAImessages);
-    const aiMessage = { id: id + 1, role: 'assistant', text: aiResponse };
-    conersationHistory.push(aiMessage);
+
+    const aiMessage = await prisma.message.create({
+        data: { ...connect, role: 'assistant', text: aiResponse },
+    });
     return aiMessage;
 }
 
 export async function GET(request: Request) {
     const url = new URL(request.url);
-    const consversationIDstring = url.searchParams.get('consversationID') ?? '0';
-    const consversationID = Number.parseInt(consversationIDstring);
-    const data = await getMessages(consversationID);
+    const consversationId = url.searchParams.get('consversationId') ?? '0';
+    const data = await getMessages(consversationId);
     return Response.json(data);
 }
 
 export async function POST(request: Request) {
-    const payload: { consversationID: number; text: string } = await request.json();
-    const newMessage = await createMessage(payload.consversationID, payload.text);
+    const payload: { consversationId: string; text: string } = await request.json();
+    const newMessage = await createMessage(payload.consversationId, payload.text);
     return Response.json(newMessage);
 }

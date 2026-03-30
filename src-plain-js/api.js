@@ -1,4 +1,4 @@
-const API_KEY = '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';
+const API_KEY = '...';
 const MODEL = 'z-ai/glm-4.5-air:free';
 export const BASE_URL = 'https://openrouter.ai/api/v1';
 
