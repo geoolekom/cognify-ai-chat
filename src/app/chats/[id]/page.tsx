@@ -1,5 +1,5 @@
-import Sidebar from '../../../Sidebar/Sidebar';
-import ChatPanel from '../../../ChatPanel/ChatPanel';
+import Sidebar from '@/src/components/Sidebar/Sidebar';
+import ChatPanel from '@/src/components/ChatPanel/ChatPanel';
 import { use } from 'react';
 
 interface ChatPageParams {

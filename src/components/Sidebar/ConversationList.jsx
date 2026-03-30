@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import Conversation from './Conversation';
-import { useConversationsQuery } from '../hooks/conversations';
+import { useConversationsQuery } from '@/src/hooks/conversations';
 
 function ConversationList({ activeConversationID }) {
     const response = useConversationsQuery();

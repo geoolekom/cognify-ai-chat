@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { useMessagesMutation } from '../hooks/messages';
+import { useMessagesMutation } from '@/src/hooks/messages';
 
 function MessageForm({ conversationID }) {
     const [input, setInput] = useState('');

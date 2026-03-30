@@ -1,5 +1,5 @@
 'use client';
-import { useConversationsMutation } from '../hooks/conversations';
+import { useConversationsMutation } from '@/src/hooks/conversations';
 
 function AddConversationButton() {
     const mutation = useConversationsMutation('New Conversation');
