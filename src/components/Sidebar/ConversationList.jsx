@@ -1,12 +1,9 @@
-'use client';
 import Link from 'next/link';
 import Conversation from './Conversation';
-import { useConversationsQuery } from '@/src/hooks/conversations';
+import { getConversations } from '@/src/server/conversations';
 
-function ConversationList({ activeConversationID }) {
-    const response = useConversationsQuery();
-    const conversations = response.data ?? [];
-
+async function ConversationList({ activeConversationID }) {
+    const conversations = await getConversations();
     const conversationElements = [];
     for (const conversation of conversations) {
         conversationElements.push(
