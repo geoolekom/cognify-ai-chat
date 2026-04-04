@@ -9,27 +9,27 @@ export async function getMessages(conversationId: string) {
     });
 }
 
-export async function createMessage(conversationId: string, text: string) {
+export async function createMessage(conversationId: string, text: string, role: 'user' | 'assistant') {
     const connect = { conversation: { connect: { id: conversationId } } };
-    const newMessage = await prisma.message.create({
-        data: { ...connect, role: 'user', text },
+    return await prisma.message.create({
+        data: { ...connect, role, text },
     });
-    const conersationHistory = await prisma.message.findMany({
-        where: { conversationId },
-        orderBy: { createdAt: 'asc' },
-    });
-    conersationHistory.push(newMessage);
-    revalidatePath(`/chats/${conversationId}`);
+    // const conersationHistory = await prisma.message.findMany({
+    //     where: { conversationId },
+    //     orderBy: { createdAt: 'asc' },
+    // });
+    // conersationHistory.push(newMessage);
+    // revalidatePath(`/chats/${conversationId}`);
 
-    const openAImessages = conersationHistory.map(({ role, text }: { role: string; text: string }) => ({
-        role,
-        content: text,
-    }));
-    const aiResponse = await llmRequest(openAImessages);
+    // const openAImessages = conersationHistory.map(({ role, text }: { role: string; text: string }) => ({
+    //     role,
+    //     content: text,
+    // }));
+    // const aiResponse = await llmRequest(openAImessages);
 
-    const aiMessage = await prisma.message.create({
-        data: { ...connect, role: 'assistant', text: aiResponse },
-    });
-    revalidatePath(`/chats/${conversationId}`);
-    return aiMessage;
+    // const aiMessage = await prisma.message.create({
+    //     data: { ...connect, role: 'assistant', text: aiResponse },
+    // });
+    // revalidatePath(`/chats/${conversationId}`);
+    // return aiMessage;
 }

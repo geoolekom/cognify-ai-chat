@@ -9,6 +9,6 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
     const payload: { consversationId: string; text: string } = await request.json();
-    const newMessage = await createMessage(payload.consversationId, payload.text);
+    const newMessage = await createMessage(payload.consversationId, payload.text, 'user');
     return Response.json(newMessage);
 }

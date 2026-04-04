@@ -1,12 +1,10 @@
+'use client';
 import ChatMessage from './ChatMessage';
-import { getMessages } from '@/src/server/messages';
 
-async function MessageList({ conversationID }) {
-    const messages = await getMessages(conversationID);
-
+function MessageList({ messages }) {
     const chatMessages = [];
     for (const message of messages) {
-        chatMessages.push(<ChatMessage key={message.id} role={message.role} text={message.text} />);
+        chatMessages.push(<ChatMessage key={message.id} role={message.role} text={message.content} />);
     }
     return <div className="p-2 flex flex-col">{chatMessages}</div>;
 }
