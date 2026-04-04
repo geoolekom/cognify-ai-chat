@@ -1,16 +1,17 @@
 'use client';
+import { useMessagesMutation } from '@/src/hooks/messages';
 import { useState } from 'react';
-import { createMessage } from '../api/messages';
 
-function MessageForm({ conversationID }) {
+function MessageForm({ conversationID, sendMessage }) {
     const [input, setInput] = useState('');
     const [counter, setCounter] = useState(0);
 
-    const mutation = createMessage(conversationID, input);
+    const mutation = useMessagesMutation(conversationID, input);
 
     function onSubmit(event) {
         event.preventDefault();
-        mutation.mutate();
+        // mutation.mutate();
+        sendMessage({ text: input });
         setInput('');
         setCounter(counter + 1);
         console.log(`Form submitted ${counter} times`);
