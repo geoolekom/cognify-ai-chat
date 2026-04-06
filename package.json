@@ -9,9 +9,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ai-sdk/openai-compatible": "^2.0.38",
+    "@ai-sdk/react": "^3.0.147",
     "@prisma/adapter-better-sqlite3": "^7.6.0",
     "@prisma/client": "^7.6.0",
     "@tanstack/react-query": "^5.95.0",
+    "ai": "^6.0.145",
     "eslint-plugin-react-refresh": "^0.5.2",
     "next": "16.1.6",
     "prisma": "^7.6.0",
