@@ -12,16 +12,16 @@ interface ChatPageProps {
 
 export default async function ChatPage({ params }: ChatPageProps) {
     const { id } = await params;
-    const initialMessages = await getMessages(id);
-    const mappedMessages = initialMessages.map((m) => ({
+    const dbMessages = await getMessages(id);
+    const messages = dbMessages.map((m) => ({
         id: m.id,
-        role: m.role,
-        content: m.text,
+        role: m.role as 'user' | 'assistant',
+        parts: [{ type: 'text' as const, text: m.text }],
     }));
     return (
         <>
             <Sidebar activeConversationID={id} />
-            <ChatPanel conversationId={id} initialMessages={mappedMessages} />
+            <ChatPanel conversationId={id} initialMessages={messages} />
         </>
     );
 }

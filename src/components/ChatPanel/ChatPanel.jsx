@@ -5,7 +5,7 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 
 function ChatPanel({ conversationId, initialMessages }) {
-    const { messages, sendMessage } = useChat({
+    const { messages, sendMessage, status } = useChat({
         id: conversationId,
         messages: initialMessages,
         transport: new DefaultChatTransport({ api: '/api/streaming-chat' }),
@@ -13,7 +13,7 @@ function ChatPanel({ conversationId, initialMessages }) {
     return (
         <main className="flex flex-col flex-1">
             <MessageList messages={messages} />
-            <MessageForm conversationID={conversationId} sendMessage={sendMessage} />
+            <MessageForm conversationId={conversationId} sendMessage={sendMessage} isPending={status === 'streaming'} />
         </main>
     );
 }
