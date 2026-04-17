@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "lint": "eslint",
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "build": "prisma generate && next build",
+    "migrate": "prisma migrate deploy",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^2.0.38",
     "@ai-sdk/react": "^3.0.147",
     "@prisma/adapter-better-sqlite3": "^7.6.0",
+    "@prisma/adapter-pg": "^7.7.0",
     "@prisma/client": "^7.6.0",
     "@tanstack/react-query": "^5.95.0",
     "ai": "^6.0.145",
