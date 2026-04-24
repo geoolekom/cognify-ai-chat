@@ -19,9 +19,11 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    if (event.request.mode === 'navigate') {
+    if (request.mode === 'navigate') {
         event.respondWith(
-            caches.match('/shell.html'), // or wherever your shell is
+            fetch(request).catch(() => {
+                caches.match('/offline.html');
+            }),
         );
     }
 
